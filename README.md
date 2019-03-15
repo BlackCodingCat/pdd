@@ -1,2 +1,3 @@
 # pdd
 pdd By 敲代码的小黑猫
+项目涉及技术:vue全家桶+ES6/7+Webpack+Node+MySQL+...
