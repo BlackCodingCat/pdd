@@ -11,11 +11,11 @@ Vue.use(VueRouter)
 
 export default new VueRouter({
     routes:[
-      {path:'/home',component:Home},
-      {path:'/recommend',component:Recommend},
-      {path:'/search',component:Search},
-      {path:'/chat',component:Chat},
-      {path:'/mine',component:Mine},
+      {path:'/home',component:Home,meta:{showTabBar:true}},
+      {path:'/recommend',component:Recommend,meta:{showTabBar:true}},
+      {path:'/search',component:Search,meta:{showTabBar:true}},
+      {path:'/chat',component:Chat,meta:{showTabBar:true}},
+      {path:'/mine',component:Mine,meta:{showTabBar:false}},
       {path:'/',redirect:'/home'}
     ]
 })
