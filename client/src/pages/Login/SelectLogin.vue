@@ -3,10 +3,10 @@
         <!-- 选择登录方式 -->
         <article class="select-login-method">
             <h4 class="title">选择登录方式</h4>
-            <div class="phone-login-btn">
+            <router-link class="phone-login-btn" to="/login" tag="button">
                 <i class="iconfont icon-shouji"></i>
                 <span>手机登录</span>
-            </div>
+            </router-link>
         </article>
         <!-- 登录底部 -->
         <footer class="login-bottom">
@@ -69,6 +69,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                border: none;
                 i{
                     font-size: 25px;
                     color: #ffffff
