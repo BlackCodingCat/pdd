@@ -22,8 +22,10 @@
                     <div :class="{current:isMessageLogin}">
                         <!-- 手机号 -->
                         <section class="login-telephone">
-                            <input type="tel" maxlength="11" placeholder="手机号">
-                            <button>获取验证码</button>
+                            <input type="tel" maxlength="11" placeholder="手机号" v-model="telephone">
+                            <button v-if="!countDown" :class="{changeColor:testTelephone()}" @click="getVertification()">获取验证码</button>
+                            <!-- 备用button -->
+                            <button v-else>已发送({{countDown}}s)</button>
                         </section>
                         <!-- 验证码 -->
                         <section class="login-vertification">
@@ -46,11 +48,19 @@
                         <section class="login-username">
                             <input type="text" maxlength="11" placeholder="用户名/手机/邮箱">
                         </section>
+
                         <!-- 密码 -->
-                        <section class="login-password">
+                        <!-- 隐藏密码 -->
+                        <section class="login-password" v-if="!showPwd">
                             <input type="password" placeholder="密码">
-                            <img src="./images/hide_pwd.png" alt="隐藏图片" class="switch-show">
+                            <img src="./images/hide_pwd.png" alt="隐藏密码" class="switch-show" @click.prevent="isShowPwd(true)">
                         </section>
+                        <!-- 显示密码 -->
+                        <section class="login-password" v-else>
+                            <input type="type" placeholder="密码">
+                            <img src="./images/show_pwd.png" alt="显示密码" class="switch-show" @click.prevent="isShowPwd(false)">
+                        </section>
+
                         <!-- 验证码 -->
                         <section class="login-vertifi-code">
                             <input type="text" maxlength="6" placeholder="验证码">
@@ -78,12 +88,36 @@
         data() {
             return {
                 isMessageLogin:true, //短信登录为true,密码登录为false
+                telephone:'', //手机号
+                countDown:0,  //获取验证码的倒计时
+                showPwd:false, //显示密码为true,不显示密码为false
             }
         },
         methods: {
-            //选择何种方式登录
+            //1.选择何种方式登录
             chooseLoginMethod(flag){
                 this.isMessageLogin = flag;
+            },
+            //2.验证手机号的合法性，让获取验证码文字变色
+            testTelephone(){
+                return /^[1][3,4,5,7,8][0-9]{9}$/.test(this.telephone);
+            },
+            //3.获取验证码倒计时
+            getVertification(){
+                if(this.testTelephone()){
+                    this.countDown = 60;
+                    this.intervalId = setInterval(()=>{
+                        this.countDown--;
+                        if(this.countDown === 0){
+                            clearInterval(this.intervalId);
+                        }
+                    },1000);
+                }
+            },
+            //4.切换密码的显示和隐藏
+            isShowPwd(flag){
+                this.showPwd = flag;
+                console.log(this.showPwd);
             }
         },
     }
@@ -188,6 +222,9 @@
                                 background-color: transparent;
                                 color: #aaa;
                                 font-size: 15px;
+                            }
+                            button.changeColor{
+                                color: #f6a622;
                             }
                         }
                         .login-vertification{
