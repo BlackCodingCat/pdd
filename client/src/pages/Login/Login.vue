@@ -18,24 +18,54 @@
             <!-- 登录的表单内容 -->
             <div class="login-content">
                 <form>
-                    <!-- 手机号 -->
-                    <section class="login-telephone">
-                        <input type="tel" maxlength="11" placeholder="手机号">
-                        <button>获取验证码</button>
-                    </section>
-                    <!-- 验证码 -->
-                    <section class="login-vertification">
-                        <input type="text" placeholder="验证码">
-                    </section>
-                    <!-- 提示 -->
-                    <section class="login-prompt">
-                        温馨提示 : 未注册拼多多的手机号，登录时将自动注册，且代表已同意
-                        <a href="javascript:;">服务协议与隐私政策</a>
-                    </section>
-                    <!-- 登录 -->
-                    <button class="login-submit">登录</button>
-                    <!-- 返回按钮 -->
-                    <router-link class="login-return" tag="button" to="/mine">返回</router-link>
+                    <!-- 1.短信登录 -->
+                    <div class="current">
+                        <!-- 手机号 -->
+                        <section class="login-telephone">
+                            <input type="tel" maxlength="11" placeholder="手机号">
+                            <button>获取验证码</button>
+                        </section>
+                        <!-- 验证码 -->
+                        <section class="login-vertification">
+                            <input type="text" placeholder="验证码">
+                        </section>
+                        <!-- 提示 -->
+                        <section class="login-prompt">
+                            温馨提示 : 未注册拼多多的手机号，登录时将自动注册，且代表已同意
+                            <a href="javascript:;">服务协议与隐私政策</a>
+                        </section>
+                        <!-- 登录 -->
+                        <button class="login-submit">登录</button>
+                        <!-- 返回按钮 -->
+                        <router-link class="login-return" tag="button" to="/mine">返回</router-link>
+                    </div>
+
+                    <!-- 2.验证码登录 -->
+                    <div >
+                        <!-- 用户名/手机/邮箱 -->
+                        <section class="login-username">
+                            <input type="text" maxlength="11" placeholder="用户名/手机/邮箱">
+                        </section>
+                        <!-- 密码 -->
+                        <section class="login-password">
+                            <input type="password" placeholder="密码">
+                            <img src="./images/hide_pwd.png" alt="隐藏图片" class="switch-show">
+                        </section>
+                        <!-- 验证码 -->
+                        <section class="login-vertifi-code">
+                            <input type="text" maxlength="6" placeholder="验证码">
+                            <img src="./images/captcha.svg" alt="验证码图片" class="get-vertification">
+                        </section>
+                        <!-- 提示 -->
+                        <section class="login-prompt">
+                            温馨提示 : 未注册拼多多的手机号，登录时将自动注册，且代表已同意
+                            <a href="javascript:;">服务协议与隐私政策</a>
+                        </section>
+                        <!-- 登录 -->
+                        <button class="login-submit">登录</button>
+                        <!-- 返回按钮 -->
+                        <router-link class="login-return" tag="button" to="/mine">返回</router-link>
+                    </div>
                 </form>                  
             </div>
         </article>
@@ -113,95 +143,168 @@
             }
             .login-content{
                 width: 100%;
-                .login-telephone{
-                    width: 100%;
-                    position: relative;
-                    input{
-                        box-sizing: border-box;
-                        width: 100%;
-                        height: 50px;
-                        border: 1px solid #cccccc;
-                        border-radius: 5px;
-                        padding-left: 15px;
-                        margin-top: 15px;
-                        font-size: 15px;
-                        outline: 0;
-                        &:focus{
-                            border: 2px solid #f6a622;
+                form{
+                    div{
+                        display: none;
+                    }
+                    div.current{
+                        display: block;
+                        .login-telephone{
+                            width: 100%;
+                            position: relative;
+                            input{
+                                box-sizing: border-box;
+                                width: 100%;
+                                height: 50px;
+                                border: 1px solid #cccccc;
+                                border-radius: 5px;
+                                padding-left: 15px;
+                                margin-top: 15px;
+                                font-size: 15px;
+                                outline: 0;
+                                &:focus{
+                                    border: 2px solid #f6a622;
+                                }
+                            }
+                            button{
+                                display: inline-block;
+                                height: 20px;
+                                position: absolute;
+                                right: 5px;
+                                top: 45%;
+                                border: none;
+                                outline: none;
+                                background-color: transparent;
+                                color: #aaa;
+                                font-size: 15px;
+                            }
+                        }
+                        .login-vertification{
+                            width: 100%;
+                            margin-top: 20px;
+                            input{
+                                box-sizing: border-box;
+                                width: 100%;
+                                height: 50px;
+                                border-radius: 5px;
+                                border: 1px solid #cccccc;
+                                padding-left: 15px;
+                                outline: none;
+                                font-size: 15px;
+                                &:focus{
+                                    border: 2px solid #f6a622;
+                                }
+                            }
+                        }
+                        .login-username{
+                            width: 100%;
+                            input{
+                                box-sizing: border-box;
+                                width: 100%;
+                                height: 50px;
+                                border: 1px solid #cccccc;
+                                border-radius: 5px;
+                                padding-left: 15px;
+                                margin-top: 15px;
+                                font-size: 15px;
+                                outline: 0;
+                                &:focus{
+                                    border: 2px solid #f6a622;
+                                }
+                            }
+                        }
+                        .login-password{
+                            width: 100%;
+                            margin-top: 20px;
+                            position: relative;
+                            input{
+                                box-sizing: border-box;
+                                width: 100%;
+                                height: 50px;
+                                border-radius: 5px;
+                                border: 1px solid #cccccc;
+                                padding-left: 15px;
+                                outline: none;
+                                font-size: 15px;
+                                &:focus{
+                                    border: 2px solid #f6a622;
+                                }
+                            }
+                            .switch-show{
+                                width: 7%;
+                                position: absolute;
+                                right: 8px;
+                                bottom: 6px;
+                            }
+                        }
+                        .login-vertifi-code{
+                            width: 100%;
+                            margin-top: 20px;
+                            position: relative;
+                            input{
+                                box-sizing: border-box;
+                                width: 100%;
+                                height: 50px;
+                                border-radius: 5px;
+                                border: 1px solid #cccccc;
+                                padding-left: 15px;
+                                outline: none;
+                                font-size: 15px;
+                                &:focus{
+                                    border: 2px solid #f6a622;
+                                }
+                            }
+                            .get-vertification{
+                                width: 40%;
+                                position: absolute;
+                                bottom: 1px;
+                                right: 3px;
+                            }
+                        }
+                        .login-prompt{
+                            box-sizing: border-box;
+                            width: 100%;
+                            height: 25px;
+                            line-height: 25px;
+                            font-size: 13px;
+                            color: #999999;
+                            letter-spacing: 1px;
+                            margin-top: 10px;
+                            padding-left: 5px;
+                            a{
+                                text-decoration: none;
+                                color: #f6a622;
+                            }
+                        }
+                        .login-submit{
+                            width: 100%;
+                            height: 38px;
+                            border-radius: 5px;
+                            text-align: center;
+                            color: #fff;
+                            font-weight: bolder;
+                            font-size: 17px;
+                            letter-spacing: 2px;
+                            outline: none;
+                            border:none;
+                            background-color: #f6a622;
+                            margin-top: 55px;
+                        }
+                        .login-return{
+                            width: 100%;
+                            height: 38px;
+                            border-radius: 5px;
+                            text-align: center;
+                            color: #f6a622;
+                            font-size: 14px;
+                            font-size: 17px;
+                            letter-spacing: 2px;
+                            outline: none;
+                            border:1px solid #f6a622;
+                            background-color: transparent;
+                            margin-top: 20px;
                         }
                     }
-                    button{
-                        display: inline-block;
-                        height: 20px;
-                        position: absolute;
-                        right: 5px;
-                        top: 45%;
-                        border: none;
-                        outline: none;
-                        background-color: transparent;
-                        color: #aaa;
-                        font-size: 15px;
-                    }
-                }
-                .login-vertification{
-                    width: 100%;
-                    margin-top: 20px;
-                    input{
-                        box-sizing: border-box;
-                        width: 100%;
-                        height: 50px;
-                        border-radius: 5px;
-                        border: 1px solid #cccccc;
-                        padding-left: 15px;
-                        outline: none;
-                        font-size: 15px;
-                        &:focus{
-                            border: 2px solid #f6a622;
-                        }
-                    }
-                }
-                .login-prompt{
-                    box-sizing: border-box;
-                    width: 100%;
-                    height: 25px;
-                    line-height: 25px;
-                    font-size: 13px;
-                    color: #999999;
-                    letter-spacing: 1px;
-                    margin-top: 10px;
-                    padding-left: 5px;
-                    a{
-                        text-decoration: none;
-                        color: #f6a622;
-                    }
-                }
-                .login-submit{
-                    width: 100%;
-                    height: 38px;
-                    border-radius: 5px;
-                    text-align: center;
-                    color: #fff;
-                    font-weight: bolder;
-                    font-size: 17px;
-                    letter-spacing: 2px;
-                    outline: none;
-                    border:none;
-                    background-color: #f6a622;
-                    margin-top: 55px;
-                }
-                .login-return{
-                    width: 100%;
-                    height: 38px;
-                    border-radius: 5px;
-                    text-align: center;
-                    color: #f6a622;
-                    font-size: 14px;
-                    font-size: 17px;
-                    letter-spacing: 2px;
-                    outline: none;
-                    border:1px solid #f6a622;
-                    background-color: transparent;
-                    margin-top: 20px;
                 }
             }
         }
