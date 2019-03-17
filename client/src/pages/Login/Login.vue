@@ -12,14 +12,14 @@
         <article class="login-main-body">
             <!-- 标题部分 -->
             <div class="login-title">
-                <span class="current">短信登录</span>
-                <span>密码登录</span>
+                <span @click.prevent="chooseLoginMethod(true)" :class="{current:isMessageLogin}">短信登录</span>
+                <span @click.prevent="chooseLoginMethod(false)" :class="{current:!isMessageLogin}">密码登录</span>
             </div>
             <!-- 登录的表单内容 -->
             <div class="login-content">
                 <form>
                     <!-- 1.短信登录 -->
-                    <div class="current">
+                    <div :class="{current:isMessageLogin}">
                         <!-- 手机号 -->
                         <section class="login-telephone">
                             <input type="tel" maxlength="11" placeholder="手机号">
@@ -41,7 +41,7 @@
                     </div>
 
                     <!-- 2.验证码登录 -->
-                    <div >
+                    <div :class="{current:!isMessageLogin}">
                         <!-- 用户名/手机/邮箱 -->
                         <section class="login-username">
                             <input type="text" maxlength="11" placeholder="用户名/手机/邮箱">
@@ -74,7 +74,18 @@
 
 <script>
     export default {
-        name:'Login'
+        name:'Login',
+        data() {
+            return {
+                isMessageLogin:true, //短信登录为true,密码登录为false
+            }
+        },
+        methods: {
+            //选择何种方式登录
+            chooseLoginMethod(flag){
+                this.isMessageLogin = flag;
+            }
+        },
     }
 </script>
 
