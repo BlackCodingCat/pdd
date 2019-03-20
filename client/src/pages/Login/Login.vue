@@ -83,6 +83,7 @@
 </template>
 
 <script>
+    import {sendMessage} from './../../api/index.js';
     export default {
         name:'Login',
         data() {
@@ -105,6 +106,7 @@
             //3.获取验证码倒计时
             getVertification(){
                 if(this.testTelephone()){
+                    sendMessage();
                     this.countDown = 60;
                     this.intervalId = setInterval(()=>{
                         this.countDown--;
