@@ -106,7 +106,7 @@
             //3.获取验证码倒计时
             getVertification(){
                 if(this.testTelephone()){
-                    sendMessage();
+                    sendMessage(this.telephone);
                     this.countDown = 60;
                     this.intervalId = setInterval(()=>{
                         this.countDown--;

@@ -3,11 +3,33 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
+const http = require('http');
+const qs = require('querystring');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+/* 使用express-session */
+app.use(session({
+  secret: '123456',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
+
+app.all("*", function(req, res, next) {
+  if (!req.get("Origin")) return next();
+  // use "*" here to accept any origin
+  res.set("Access-Control-Allow-Origin","*");
+  res.set("Access-Control-Allow-Methods", "GET");
+  res.set("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+  // res.set('Access-Control-Allow-Max-Age', 3600);
+  if ("OPTIONS" === req.method) return res.sendStatus(200);
+  next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

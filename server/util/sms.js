@@ -1,6 +1,6 @@
 //首先引入https和querystring模块
-let https = require('http');
-let qs = require('querystring');
+var https = require('https');
+var qs = require('querystring');
 
 
 
@@ -9,18 +9,18 @@ let qs = require('querystring');
 
 //send_sms方法
 function send_sms(uri, apikey, mobile, text) {
-    let sms_host = 'sms.yunpian.com'; //请求地址的url
-    let post_data = {
+    var sms_host = 'sms.yunpian.com'; //请求地址的url
+    var post_data = {
         'apikey': apikey,
         'mobile': mobile,
         'text': text,
     };
-    let content = qs.stringify(post_data);
+    var content = qs.stringify(post_data);
     //把发送的数据解析为字符串发送
     post(uri, content, sms_host);
 
     function post(uri, content, host) {
-        let options = {
+        var options = {
             hostname: host,
             port: 443,
             path: uri,
@@ -29,7 +29,7 @@ function send_sms(uri, apikey, mobile, text) {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             }
         };
-        let req = https.request(options, function (res) {
+        var req = https.request(options, function (res) {
             res.setEncoding('utf8');
             res.on('data', function (chunk) {
                 console.log('BODY: ' + chunk);
@@ -47,10 +47,10 @@ exports.text = (code)=>{
     return '【沈佳棋】您的验证码是'+code+'。如非本人操作，请忽略本短信';
 }
 exports.randomCode = (length)=>{
-    let chars = ['0','1','2','3','4','5','6','7','8','9'];
-    let result = ""; 
-    for(let i = 0; i < length ; i ++) {
-        let index = Math.ceil(Math.random()*9);
+    var chars = ['0','1','2','3','4','5','6','7','8','9'];
+    var result = ""; 
+    for(var i = 0; i < length ; i ++) {
+        var index = Math.ceil(Math.random()*9);
         result += chars[index];
     }
     return result;
