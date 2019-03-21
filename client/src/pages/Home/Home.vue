@@ -1,12 +1,20 @@
 <template>
     <div class="home">
-        首页
+        <ly-tab-nav></ly-tab-nav>
+        <router-view></router-view>
+        <tab-bar></tab-bar>
     </div>
 </template>
 
 <script>
+    import LyTabNav from './../../components/lyTabNav/LyTabNav.vue'
+    import TabBar from './../../components/TabBar/TabBar.vue'
     export default {
-        name:'Home'
+        name:'Home',
+        components:{
+            LyTabNav,
+            TabBar
+        }
     }
 </script>
 
@@ -14,9 +22,6 @@
     .home{
         width: 100%;
         height: 100%;
-        // background-color: red;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        background-color: #f5f5f5;
     }
 </style>

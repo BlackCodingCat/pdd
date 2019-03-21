@@ -2,7 +2,7 @@
     <div class="tab-bar-container">
         <div class="tab-bar-inner">
             <div class="tab-bar-item" @click="switchTo('/home')">
-                <img src="./img/icon_home_selected.png" alt="首页选中" v-if="this.$route.path === '/home'">
+                <img src="./img/icon_home_selected.png" alt="首页选中" v-if="this.$route.path.includes('/home')">
                 <img src="./img/icon_home.png" alt="首页" v-else>
                 <span>首页</span>
             </div>
