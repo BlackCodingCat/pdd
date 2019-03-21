@@ -1,7 +1,8 @@
 <template>
     <div class="home">
+        <!-- 头部导航 -->
         <ly-tab-nav></ly-tab-nav>
-        <router-view></router-view>
+        <router-view></router-view> 
         <tab-bar></tab-bar>
     </div>
 </template>

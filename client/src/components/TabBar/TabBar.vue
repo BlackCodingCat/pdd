@@ -53,6 +53,7 @@
         left:0;
         bottom: 0;
         box-shadow: 0px -2px 5px #cccccc;
+        background-color: #f5f5f5;
         .tab-bar-inner{
             width: 100%;
             height: 100%;
