@@ -120,13 +120,12 @@
             },
             handleTouchStart(event){
                 this.startX = event.touches[0].pageX;
-                console.log('开始触摸');
             },
             handleTouchMove(event){
                 //nav区域的滚动距离
                 this.navMoveX = event.touches[0].pageX - this.startX;
                 //计算滚动条的滚动距离
-                this.barMoveX = -(this.BarContainerW*this.navMoveX/this.navInnerW);
+                this.barMoveX = -(this.BarContainerW*this.navMoveX/this.navInnerW-this.endFlag);
                 //边界值处理
                 if(this.barMoveX <= 0){
                     this.barMoveX = 0;
