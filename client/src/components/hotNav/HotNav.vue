@@ -71,7 +71,7 @@
         </div>
         <!-- nav底部滚动条 -->
         <div class="bottom-bar-container">
-            <div class="bottom-bar-inner">
+            <div class="bottom-bar-inner" :style="innerBarStyle">
             </div>
         </div>
     </div>
@@ -79,7 +79,67 @@
 
 <script>
     export default {
-        name:'HotNav'
+        name:'HotNav',
+        data() {
+            return {
+                navContainerW:window.innerWidth*0.97346 || document.documentElement.clientWidth*0.97346 || document.body.clientWidth*0.97346,
+                navInnerW:window.innerWidth*0.97346*1.6 || document.documentElement.clientWidth*0.97346*1.6 || document.body.clientWidth*0.97346*1.6,
+                BarContainerW:100,
+                BarInnerW:0,
+                startX:0,
+                navMoveX:0,
+                barMoveX:0,
+                endFlag:0
+            }
+        },
+        mounted() {
+            //获取底部滚动条的宽度
+            this.getBottomBarW();
+            //绑定移动事件
+            this.bindEvent();
+        },
+        computed: {
+            innerBarStyle(){
+                return {
+                    width:`${this.BarInnerW}px`,
+                    left:`${this.barMoveX}px`
+                }
+            }
+        },
+        methods: {
+            //获取底部滚动条的宽度
+            getBottomBarW(){
+                this.BarInnerW = this.BarContainerW*this.navContainerW/this.navInnerW;
+            },
+            //绑定移动事件
+            bindEvent(){
+                let navContainer = document.getElementsByClassName('hot-nav-container')[0];
+                navContainer.addEventListener('touchstart',this.handleTouchStart,false);
+                navContainer.addEventListener('touchmove',this.handleTouchMove,false);
+                navContainer.addEventListener('touchend',this.handleTouchEnd,false);
+            },
+            handleTouchStart(event){
+                this.startX = event.touches[0].pageX;
+                console.log('开始触摸');
+            },
+            handleTouchMove(event){
+                //nav区域的滚动距离
+                this.navMoveX = event.touches[0].pageX - this.startX;
+                //计算滚动条的滚动距离
+                this.barMoveX = -(this.BarContainerW*this.navMoveX/this.navInnerW);
+                //边界值处理
+                if(this.barMoveX <= 0){
+                    this.barMoveX = 0;
+                }
+                if(this.barMoveX >= (this.BarContainerW-this.BarInnerW)){
+                    this.barMoveX = this.BarContainerW - this.BarInnerW;
+                }
+            },
+            handleTouchEnd(event){
+                //结束以后记录本次的bar移动距离
+                this.endFlag = this.barMoveX;
+            }
+        },
     }
 </script>
 
@@ -138,10 +198,12 @@
             margin-left: -50px;
             bottom: 10px;
             .bottom-bar-inner{
-                width: 50%;
+                width: 0;
                 height: 2px;
                 border-radius: 2px;
                 background-color: orangered;
+                position: absolute;
+                left: 0;
             }
         }
         .adver{
