@@ -1,0 +1,1 @@
+export const HOME_CASUAL = 'home_casual'; //轮播图
