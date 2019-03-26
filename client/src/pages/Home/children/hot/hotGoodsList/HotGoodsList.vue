@@ -1,62 +1,14 @@
 <template>
-    <div class="hot-goods-list">
+    <div class="hot-goods-list" v-if="hotGoodsList.length > 0">
         <div class="goods-list-container">
-            <div class="goods-list-items">
+            <div class="goods-list-items" v-for="(goodsList,index) in hotGoodsList" :key="index">
                 <div class="goods-img">
-                    <img src="./imgs/shop_list/shop.jpg" alt="" width="100%">
+                    <img :src="goodsList.thumb_url" alt="" width="100%">
                 </div>
-                <h6 class="goods-title">春夏新款韩版学生阔腿裤女宽松黑色休闲裤高腰显瘦九分直筒裤子女</h6>
+                <h6 class="goods-title">{{goodsList.goods_name}}</h6>
                 <div class="goods-bottom">
                     <div class="price">
-                        <i class="unit">￥</i><span class="price">25.66</span>
-                    </div>
-                    <span class="description">已拼3555件</span>
-                    <div class="users">
-                        <img src="./imgs/shop_list/user1.jpg" alt="">
-                        <img src="./imgs/shop_list/user2.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="goods-list-items">
-                <div class="goods-img">
-                    <img src="./imgs/shop_list/shop.jpg" alt="" width="100%">
-                </div>
-                <h6 class="goods-title">春夏新款韩版学生阔腿裤女宽松黑色休闲裤高腰显瘦九分直筒裤子女</h6>
-                <div class="goods-bottom">
-                    <div class="price">
-                        <i class="unit">￥</i><span class="price">25.66</span>
-                    </div>
-                    <span class="description">已拼3555件</span>
-                    <div class="users">
-                        <img src="./imgs/shop_list/user1.jpg" alt="">
-                        <img src="./imgs/shop_list/user2.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="goods-list-items">
-                <div class="goods-img">
-                    <img src="./imgs/shop_list/shop.jpg" alt="" width="100%">
-                </div>
-                <h6 class="goods-title">春夏新款韩版学生阔腿裤女宽松黑色休闲裤高腰显瘦九分直筒裤子女</h6>
-                <div class="goods-bottom">
-                    <div class="price">
-                        <i class="unit">￥</i><span class="price">25.66</span>
-                    </div>
-                    <span class="description">已拼3555件</span>
-                    <div class="users">
-                        <img src="./imgs/shop_list/user1.jpg" alt="">
-                        <img src="./imgs/shop_list/user2.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="goods-list-items">
-                <div class="goods-img">
-                    <img src="./imgs/shop_list/shop.jpg" alt="" width="100%">
-                </div>
-                <h6 class="goods-title">春夏新款韩版学生阔腿裤女宽松黑色休闲裤高腰显瘦九分直筒裤子女</h6>
-                <div class="goods-bottom">
-                    <div class="price">
-                        <i class="unit">￥</i><span class="price">25.66</span>
+                        <i class="unit">￥</i><span class="price">{{goodsList.price}}</span>
                     </div>
                     <span class="description">已拼3555件</span>
                     <div class="users">
@@ -70,8 +22,15 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex'
     export default {
-        name:'HotGoodsList'
+        name:'HotGoodsList',
+        computed: {
+            ...mapState(['hotGoodsList'])
+        },
+        mounted() {
+            this.$store.dispatch('reqHotGoodsList');
+        },
     }
 </script>
 
